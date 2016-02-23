@@ -17,3 +17,7 @@ docker run --detach \
 -i -t \
 alloylab/varnish;
 ```
+
+Also add one of the following so the Container knows where to send the traffic,
+--link web1:web1 \
+--env='VARNISH_BACKEND_ADDRESS=192.168.1.1' \
