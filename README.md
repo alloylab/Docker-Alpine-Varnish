@@ -1,20 +1,23 @@
 # Varnish Docker Container
 
-[![](https://badge.imagelayers.io/alloylab/wkhtmltopdf:latest.svg)](https://imagelayers.io/?images=alloylab/wkhtmltopdf:latest)
+[![](https://badge.imagelayers.io/alloylab/varnish:latest.svg)](https://imagelayers.io/?images=alloylab/varnish:latest)
 
 > Alpine Lastest  
-> wkhtmltopdf
+> Varnish 4.x
 
 ## Usage
 
-wkhtmltopdf with qt patches
-
-yes, Alpine does have a wkhtmltopdf package... but it doesn't include the qt patches ... enjoy!
+Default VCL forwards port 80 traffic to port 8080
 
 ```
 docker run --detach \
---name wkhtmltopdf \
+--publish 80:80 \
+--name varnish \
 --restart always \
 -i -t \
-alloylab/wkhtmltopdf;
+alloylab/varnish;
 ```
+
+Also add one of the following so the Container knows where to send the traffic,
+--link web1:web1 \
+--env='VARNISH_BACKEND_ADDRESS=192.168.1.1' \
